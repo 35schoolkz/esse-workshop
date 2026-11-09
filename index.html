@@ -155,7 +155,7 @@ if(!configured){setupRequired()}else{
   document.getElementById("refreshReviews").addEventListener("click",loadReviews);
   document.getElementById("exportReviews").addEventListener("click",()=>{
    const rows=[["Аты","Пікір","Баға","Күйі","Уақыты"],...cachedReviews.map(({data})=>[data.name||"",data.message||"",data.rating||"",data.status==="done"?"Өңделді":"Жаңа",data.createdAt?.toDate?data.createdAt.toDate().toLocaleString("kk-KZ"):""])];
-   const csv="\\uFEFF"+rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(";")).join("\\r\\n");
+   const csv="\uFEFF"+rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(";")).join("\r\n");
    const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"})),a=document.createElement("a");a.href=url;a.download="esse-workshop-pikirler.csv";a.click();URL.revokeObjectURL(url);
   });
  }catch(e){console.error(e);setupRequired()}
