@@ -9,4 +9,4 @@ export const firebaseConfig = {
   appId: "YOUR_APP_ID"
 };
 // Use the exact Google account email that should administer reviews.
-export const adminEmail = "ADMIN_EMAIL_HERE";
+export const adminEmail = "erhan.eerom41k@gmail.com";
