@@ -120,7 +120,7 @@ const ids=["topic","thesis","opinion","evidence","example","conclusion"];
 const draftKey="esseWorkshopEssayDraftV1";
 function updateBuilderTools(){
  const values=ids.map(id=>document.getElementById(id).value.trim());
- const words=values.slice(1).join(" ").split(/\\s+/).filter(Boolean).length;
+ const words=values.slice(1).join(" ").split(/\s+/).filter(Boolean).length;
  document.getElementById("builderWords").textContent=words+" сөз";
  document.getElementById("builderFilled").textContent=values.slice(1).filter(Boolean).length+"/5 бөлім толтырылды";
 }
