@@ -77,9 +77,9 @@ const questions=[
 {q:"Эссені соңғы рет тексергенде нені қарау керек?",a:["Тек сөз санын","Тек тақырып атауын","Логикасын, дәлелдерін, тілдік қателерін және құрылымын","Тек соңғы сөйлемді"],c:2,e:"Сапалы редакция мазмұнды, құрылымды және тілдік сауаттылықты бірге тексереді."}
 ];
 const themeToggle=document.getElementById("themeToggle");
-if(localStorage.getItem("esseWorkshopTheme")==="dark")document.body.classList.add("dark");
+try{if(localStorage.getItem("esseWorkshopTheme")==="dark")document.body.classList.add("dark")}catch(e){}
 function syncThemeButton(){themeToggle.textContent=document.body.classList.contains("dark")?"☼":"◐";themeToggle.setAttribute("aria-label",document.body.classList.contains("dark")?"Жарық тақырыпқа ауысу":"Қараңғы тақырыпқа ауысу")}
-syncThemeButton();themeToggle.addEventListener("click",()=>{document.body.classList.toggle("dark");localStorage.setItem("esseWorkshopTheme",document.body.classList.contains("dark")?"dark":"light");syncThemeButton()});
+syncThemeButton();themeToggle.addEventListener("click",()=>{document.body.classList.toggle("dark");try{localStorage.setItem("esseWorkshopTheme",document.body.classList.contains("dark")?"dark":"light")}catch(e){}syncThemeButton()});
 const KEY="esseWorkshopSchoolV2";let state={done:[],points:0,tests:0,high:0,daily:"",dailyTopic:"",unlockedLevel:1,levelScores:{}};
 try{state={...state,...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){};renderProgress()}
