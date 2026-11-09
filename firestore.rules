@@ -7,8 +7,11 @@ service cloud.firestore {
     }
 
     match /reviews/{reviewId} {
-      // Anyone may submit a review; no public reads or public edits/deletes.
-      allow create: if request.resource.data.keys().hasOnly([
+      // Public users may submit only a validated new review.
+      allow create: if request.resource.data.keys().hasAll([
+          "name", "message", "rating", "status", "createdAt"
+        ])
+        && request.resource.data.keys().hasOnly([
           "name", "message", "rating", "status", "createdAt"
         ])
         && request.resource.data.name is string
@@ -22,7 +25,14 @@ service cloud.firestore {
         && request.resource.data.rating <= 5
         && request.resource.data.status == "new"
         && request.resource.data.createdAt == request.time;
+
+      // Only the administrator can read, update, or delete reviews.
       allow read, update, delete: if isAdmin();
+    }
+
+    // Deny access to every collection not explicitly allowed above.
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
